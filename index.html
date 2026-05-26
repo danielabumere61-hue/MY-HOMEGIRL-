@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My World's Best Homegirl</title>
+    <style>
+        /* --- Design System & Vibes (Sweet Pink Shi) --- */
+        :root {
+            --bg-color: #fff0f3; /* Dreamy soft blush pink background */
+            --text-main: #4a3b3d; /* Soft dark rose charcoal */
+            --text-muted: #8a7578; /* Muted mauve pink */
+            --accent-cool: #ffb3c1; /* Classic soft pastel pink */
+            --accent-warm: #ff758f; /* Vibrant sweet rose pink */
+            --card-bg: #ffffff;
+            --lace-color: #ff758f; 
+            --panel-bg: #ffccd5; /* Slightly darker pink for the corset panels */
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ffd6df;
+            margin: 50px 0;
+        }
+
+        /* --- Hero Section --- */
+        header {
+            text-align: center;
+            padding: 40px 0 20px 0;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--accent-warm);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 10px rgba(255, 117, 143, 0.2);
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            margin: 0 0 16px 0;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: #5c3d42;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin: 0 auto 30px auto;
+        }
+
+        /* --- Grid Section (The Receipts) --- */
+        .section-title {
+            font-size: 1.15rem;
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(255, 117, 143, 0.03);
+            border: 1px solid #ffe3e8;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--accent-warm);
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+        }
+
+        /* --- Care-o-Meter Feature --- */
+        .meter-box {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid #ffe3e8;
+        }
+        .slider {
+            -webkit-appearance: none;
+            width: 80%;
+            height: 6px;
+            border-radius: 5px;
+            background: #ffe3e8;
+            outline: none;
+            margin: 20px 0;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent-warm);
+            cursor: pointer;
+        }
+
+        /* --- Soundboard Feature --- */
+        .soundboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .sound-btn {
+            background: white;
+            border: 1px solid #ffd6df;
+            color: var(--text-main);
+            padding: 12px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(255, 117, 143, 0.04);
+        }
+        .sound-btn:hover {
+            border-color: var(--accent-warm);
+            background-color: #fff0f3;
+        }
+
+        /* --- INTERACTIVE CORSET CARD STYLE --- */
+        .corset-outer-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .card-container {
+            position: relative;
+            width: 360px;
+            height: 500px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(255, 117, 143, 0.08);
+            border: 1px solid #ffe3e8;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        .inner-message {
+            text-align: center;
+            width: 100%;
+            z-index: 1;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.5s ease-in-out;
+            transition-delay: 0.1s;
+        }
+
+        .inner-message h2 {
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            margin: 0 0 12px 0;
+            color: var(--text-main);
+        }
+
+        .inner-message p {
+            font-size: 0.95rem;
+            line-height: 1.65;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .heart-icon {
+            font-size: 1.2rem;
+            color: var(--lace-color);
+            margin-top: 15px;
+            display: block;
+        }
+
+        .corset-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .corset-panel {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background-color: var(--panel-bg);
+            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: inset 0 0 20px rgba(255, 117, 143, 0.1);
+        }
+
+        .panel-left { left: 0; border-right: 2px dashed rgba(255, 255, 255, 0.5); transform-origin: left center; }
+        .panel-right { right: 0; border-left: 2px dashed rgba(255, 255, 255, 0.5); transform-origin: right center; }
+
+        .eyelet {
+            width: 10px;
+            height: 10px;
+            background: var(--bg-color);
+            border-radius: 50%;
+            border: 2px solid var(--lace-color);
+            position: absolute;
+            z-index: 12;
+        }
+        .panel-left .eyelet { right: 8px; }
+        .panel-right .eyelet { left: 8px; }
+
+        .ey-1 { top: 15%; }
+        .ey-2 { top: 35%; }
+        .ey-3 { top: 55%; }
+        .ey-4 { top: 75%; }
+
+        .lace-string {
+            position: absolute;
+            background: var(--lace-color);
+            height: 3px;
+            z-index: 11;
+            transition: all 0.5s ease;
+            transform-origin: center;
+        }
+
+        .l-1 { top: 25%; left: 50%; width: 50px; transform: translate(-50%, -50%) rotate(25deg); }
+        .l-2 { top: 25%; left: 50%; width: 50px; transform: translate(-50%, -50%) rotate(-25deg); }
+        .l-3 { top: 45%; left: 50%; width: 50px; transform: translate(-50%, -50%) rotate(25deg); }
+        .l-4 { top: 45%; left: 50%; width: 50px; transform: translate(-50%, -50%) rotate(-25deg); }
+        .l-5 { top: 65%; left: 50%; width: 50px; transform: translate(-50%, -50%) rotate(25deg); }
+        .l-6 { top: 65%; left: 50%; width: 50px; transform: translate(-50%, -50%) rotate(-25deg); }
+
+        .corset-bow {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.8rem;
+            color: var(--lace-color);
+            z-index: 15;
+            transition: all 0.4s ease;
+        }
+
+        .cover-prompt {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #5c3d42;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            z-index: 15;
+            white-space: nowrap;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Corset Open Triggers */
+        .card-container:hover .panel-left { transform: translateX(-100%); }
+        .card-container:hover .panel-right { transform: translateX(100%); }
+        .card-container:hover .lace-string { width: 0; opacity: 0; }
+        .card-container:hover .corset-bow, .card-container:hover .cover-prompt { opacity: 0; transform: translate(-50%, 20px); }
+        .card-container:hover .inner-message { opacity: 1; transform: scale(1); }
+
+        /* --- Certificate Section --- */
+        .certificate {
+            background-color: var(--card-bg);
+            border: 1px solid #ffd6df;
+            padding: 45px 30px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(255, 117, 143, 0.02);
+        }
+
+        .cert-title {
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        /* --- Button & Interaction --- */
+        .btn-container {
+            text-align: center;
+            margin-top: 35px;
+        }
+
+        .btn {
+            background-color: var(--text-main);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(74, 59, 61, 0.2);
+        }
+
+        .btn:hover {
+            background-color: var(--accent-warm);
+            transform: translateY(-1px);
+        }
+
+        /* --- Pop-up Letter Layout --- */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(74, 59, 61, 0.3);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            z-index: 1000;
+        }
+
+        .overlay.active { opacity: 1; pointer-events: auto; }
+
+        .letter-modal {
+            background: #fffdfb;
+            padding: 45px;
+            max-width: 520px;
+            width: 85%;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(74, 59, 61, 0.15);
+            transform: translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid #ffe3e8;
+        }
+
+        .overlay.active .letter-modal { transform: translateY(0); }
+
+        .letter-text {
+            font-family: Georgia, serif;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #3b2f31;
+        }
+
+        .letter-text p {
+            margin-bottom: 20px;
+        }
+
+        .close-letter-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 20px;
+            padding: 0;
+            font-size: 0.85rem;
+        }
+
+        /* --- Confetti Elements --- */
+        .confetti {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            position: absolute;
+            animation: fall 3.5s linear infinite;
+            z-index: 1001;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-50px) rotate(0deg); top: 0; }
+            100% { transform: translateY(100vh) rotate(360deg); top: 0; }
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <header>
+            <span class="tag">Children's Day Special</span>
+            <h1>You play it cool, I know.</h1>
+            <p class="subtitle">A completely quiet space dedicated to the girl who handles the rest of the world with a shrug, but holds a giant soft spot just for me.</p>
+        </header>
+
+        <hr>
+
+        <section>
+            <h2 class="section-title">A Locked Memory</h2>
+            <div class="corset-outer-wrapper">
+                <div class="card-container">
+                    
+                    <div class="inner-message">
+                        <h2>Remember how we first met?</h2>
+                        <p style="margin-bottom: 12px; font-style: italic; font-size: 0.85rem; color: var(--lace-color);">Day one behavior...</p>
+                        <p>
+                            I literally walked up to you and said hi, and you completely brushed it off. You didn't even pay a single bit of attention to my greetings. Just pure, unfiltered nonchalance right from the start.
+                        </p>
+                        <p style="margin-top: 10px;">
+                            Looking back, it's hilarious because behind all that unbothered day-one armor, you turned out to be the sweetest, most protective soul in my corner. 
+                        </p>
+                        <span class="heart-icon">Look at us now 💗</span>
+                    </div>
+
+                    <div class="corset-overlay">
+                        <div class="corset-panel panel-left">
+                            <div class="eyelet ey-1"></div>
+                            <div class="eyelet ey-2"></div>
+                            <div class="eyelet ey-3"></div>
+                            <div class="eyelet ey-4"></div>
+                        </div>
+                        <div class="corset-panel panel-right">
+                            <div class="eyelet ey-1"></div>
+                            <div class="eyelet ey-2"></div>
+                            <div class="eyelet ey-3"></div>
+                            <div class="eyelet ey-4"></div>
+                        </div>
+                        <div class="lace-string l-1"></div>
+                        <div class="lace-string l-2"></div>
+                        <div class="lace-string l-3"></div>
+                        <div class="lace-string l-4"></div>
+                        <div class="lace-string l-5"></div>
+                        <div class="lace-string l-6"></div>
+                        <div class="corset-bow">🎀</div>
+                        <div class="cover-prompt">Hover to Untie Laces</div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section>
+            <h2 class="section-title">The "I Have No Feelings" Scale</h2>
+            <div class="meter-box">
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Go ahead, try to drag her care level down. Try to make it match her exterior.</p>
+                <input type="range" min="0" max="100" value="100" class="slider" id="careSlider" oninput="rigSlider()">
+                <h3 id="sliderStatus" style="margin: 10px 0 0 0; font-size: 1.05rem; color: var(--accent-warm); font-weight: 600;">Error: The system knows you love me too much (100%)</h3>
+            </div>
+        </section>
+
+        <hr>
+
+        <section>
+            <h2 class="section-title">Things I Notice While You're Playing It Cool</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Gentle with Me</h3>
+                    <p>You carry a tiny bit of that nonchalant aura around me, but it's never harsh. With me, you're just safe. You notice the exact second my tone shifts, when my energy drops, or when I'm quietly anxious, and you effortlessly look out for my peace without making it an ordeal.</p>
+                </div>
+                <div class="card">
+                    <h3>Hell Yeah to My Friends</h3>
+                    <p>The contrast is hilarious. To my friends and the rest of the world? You are the ultimate, unbothered, fierce gatekeeper. If anyone steps out of line or acts slightly sketchy toward me, your nonchalance completely drops and you will absolutely clear the room for me.</p>
+                </div>
+                <div class="card">
+                    <h3>Quiet Acts of Love</h3>
+                    <p>Your affection is a hidden language. It's in the text checking if I got home safely, the sudden food delivery when you know I'm stressed, and the way you act like it was "no big deal" just so I don't feel pressured to owe you anything.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section>
+            <h2 class="section-title">Things She Says</h2>
+            <div class="soundboard">
+                <button class="sound-btn" onclick="showQuote('“I mean, I don\'t really care, but give me their full name, what they look like, and exactly what they told you.”')">“Whatever, it\'s fine.”</button>
+                <button class="sound-btn" onclick="showQuote('“I literally just ordered too much food by accident. Eat it so it doesn\'t sit in my fridge and rot.”')">“I\'m not even hungry.”</button>
+                <button class="sound-btn" onclick="showQuote('“I\'m only texting because you haven\'t posted anything and I wanted to make sure you didn\'t die.”')">“Just checking if you\'re alive.”</button>
+                <button class="sound-btn" onclick="showQuote('...*shifts eyes, ready to completely shut down the friend who made a slick comment*... “What did they just say?”')">When friends step out of line</button>
+            </div>
+            <div style="min-height: 60px; margin-top: 30px; text-align: center; padding: 0 10px;">
+                <div id="quoteDisplay" style="font-family: Georgia, serif; font-style: italic; font-size: 1.1rem; color: var(--text-main); font-weight: 500;"></div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section>
+            <div class="certificate">
+                <div class="cert-title">Quiet Truths</div>
+                <p style="font-size: 1.05rem; color: var(--text-muted); margin-bottom: 5px;">This holds the official acknowledgment that you are entirely stuck with me.</p>
+                <h2 style="font-size: 1.8rem; margin: 15px 0; font-weight: 800; color: var(--text-main);">My Forever Homegirl</h2>
+                <p style="max-width: 500px; margin: 0 auto; color: var(--text-muted); font-size: 0.95rem;">The one who plays it perfectly relaxed, but remains fiercely loyal behind closed doors. Happy Children's Day to my safe place.</p>
+                
+                <div class="btn-container">
+                    <button class="btn" onclick="openLetter()">Open this, or don't (Please do)</button>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>For your eyes only. Go back to being unbothered now.</p>
+        </footer>
+
+    </div>
+
+    <div class="overlay" id="letterOverlay">
+        <div class="letter-modal">
+            <div class="letter-text">
+                <p>Hey,</p>
+                <p>I know you're probably rolling your eyes right now, trying to find a sarcastic comment or a witty reply just so things don't feel too real. That's fine, do your thing—I expect nothing less from you. But for just a minute, please sit still, put your armor down, and read this with your whole heart.</p>
+                <p>Happy Children's Day to the only person who truly, effortlessly gets me. I don't say it nearly enough because I know you like to play it cool, but you are the absolute most comforting, steady presence in my entire life. I love how you handle the world with that quiet, unbothered stance, and I love even more how that completely melts into someone so remarkably gentle, sweet, and safe when it's just us.</p>
+                <p>But what I cherish most is the way you protect me. It honestly blows my mind how fast your nonchalance drops the exact second anyone—even my own friends—steps out of line. You don't hesitate, you don't stall; you just instantly stand up, ready to slide for me and clear the room. Knowing that I have someone so fiercely loyal in my corner makes me feel completely protected, entirely safe, and infinitely less alone in this chaotic world.</p>
+                <p>Thank you for letting me be a mess, for catching me before I even realize I'm falling, and for loving me in that quiet, beautiful way of yours that never asks for anything in return. You pretend you don't have a soft spot, but you possess the most genuine, deeply caring soul I have ever known. You mean more to me than words will ever be able to capture.</p>
+                <p style="font-size: 1.45rem; color: var(--accent-warm); font-weight: bold; margin: 25px 0; text-align: center; text-shadow: 0 2px 4px rgba(255,117,143,0.15);">I love you 💗</p>
+                <p>Alright, the expiration date on the mushy stuff is officially up. You can put your cool armor right back on now, pretend you didn't feel a thing, and go back to brushing everyone off.</p>
+                <p style="margin-top: 30px; font-weight: bold; font-family: sans-serif; font-size: 0.95rem; color: var(--accent-warm);">— Yours completely,</p>
+                <p style="margin-top: -10px; font-weight: bold; font-family: sans-serif; font-size: 1.1rem; color: var(--text-main);">The one you secretly care about</p>
+            </div>
+            <button class="close-letter-btn" onclick="closeLetter()">Close this before we both start crying</button>
+        </div>
+    </div>
+
+    <script>
+        // Rigged Slider Logic
+        function rigSlider() {
+            const slider = document.getElementById("careSlider");
+            const statusText = document.getElementById("sliderStatus");
+            if(slider.value < 95) {
+                setTimeout(() => {
+                    slider.value = 100;
+                    statusText.innerText = "Error: The system knows you love me too much (100%)";
+                }, 250);
+            }
+        }
+
+        // Quote Soundboard Logic
+        function showQuote(quoteText) {
+            document.getElementById("quoteDisplay").innerText = quoteText;
+        }
+
+        // Pop-up Letter Logic + Trigger Pink Confetti
+        function openLetter() {
+            document.getElementById("letterOverlay").classList.add("active");
+            triggerConfetti();
+        }
+
+        function closeLetter() {
+            document.getElementById("letterOverlay").classList.remove("active");
+        }
+
+        // Confetti Generator (Pink Theme)
+        function triggerConfetti() {
+            const colors = ['#ffb3c1', '#ff758f', '#ffccd5', '#ffffff'];
+            for (let i = 0; i < 60; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDelay = Math.random() * 2.5 + 's';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.random() * 6 + 5 + 'px';
+                confetti.style.width = size;
+                confetti.style.height = size;
+                document.body.appendChild(confetti);
+                setTimeout(() => { confetti.remove(); }, 4000);
+            }
+        }
+    </script>
+
+</body>
+</html>
